@@ -1,0 +1,44 @@
+[
+  {
+    "id": "column.public.cliente.senha_cliente",
+    "label": "Add column \"senha_cliente\" to \"cliente\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "senha_cliente",
+        "table": "cliente"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"senha_cliente\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "senha_cliente"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"senha_cliente\"",
+        "sql": "ALTER TABLE \"public\".\"cliente\" ADD COLUMN \"senha_cliente\" character varying"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"senha_cliente\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "senha_cliente"
+        ]
+      }
+    ]
+  }
+]

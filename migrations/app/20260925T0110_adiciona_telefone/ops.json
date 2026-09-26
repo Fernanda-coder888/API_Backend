@@ -1,0 +1,44 @@
+[
+  {
+    "id": "column.public.user.telefone",
+    "label": "Add column \"telefone\" to \"user\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "telefone",
+        "table": "user"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"telefone\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "user",
+          "telefone"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"telefone\"",
+        "sql": "ALTER TABLE \"public\".\"user\" ADD COLUMN \"telefone\" text"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"telefone\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "user",
+          "telefone"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,411 @@
+[
+  {
+    "id": "dropColumn.cliente.cliente_email",
+    "label": "Drop column \"cliente_email\" from \"cliente\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "cliente_email",
+        "table": "cliente"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"cliente_email\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "cliente_email"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop column \"cliente_email\"",
+        "sql": "ALTER TABLE \"public\".\"cliente\" DROP COLUMN \"cliente_email\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"cliente_email\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "cliente_email"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dropColumn.cliente.cliente_nome",
+    "label": "Drop column \"cliente_nome\" from \"cliente\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "cliente_nome",
+        "table": "cliente"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"cliente_nome\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "cliente_nome"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop column \"cliente_nome\"",
+        "sql": "ALTER TABLE \"public\".\"cliente\" DROP COLUMN \"cliente_nome\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"cliente_nome\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "cliente_nome"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dropColumn.cliente.cliente_password",
+    "label": "Drop column \"cliente_password\" from \"cliente\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "cliente_password",
+        "table": "cliente"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"cliente_password\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "cliente_password"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop column \"cliente_password\"",
+        "sql": "ALTER TABLE \"public\".\"cliente\" DROP COLUMN \"cliente_password\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"cliente_password\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "cliente_password"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dropTable.telefone_cliente",
+    "label": "Drop table \"telefone_cliente\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "telefone_cliente"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"telefone_cliente\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"telefone_cliente\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop table \"telefone_cliente\"",
+        "sql": "DROP TABLE \"public\".\"telefone_cliente\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"telefone_cliente\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"telefone_cliente\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dropColumn.user.telefone",
+    "label": "Drop column \"telefone\" from \"user\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "telefone",
+        "table": "user"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"telefone\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "user",
+          "telefone"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop column \"telefone\"",
+        "sql": "ALTER TABLE \"public\".\"user\" DROP COLUMN \"telefone\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"telefone\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "user",
+          "telefone"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.tel_cliente",
+    "label": "Create table \"tel_cliente\"",
+    "summary": "Creates table \"tel_cliente\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "tel_cliente"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"tel_cliente\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"tel_cliente\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"tel_cliente\"",
+        "sql": "CREATE TABLE \"public\".\"tel_cliente\" (\n  \"id_cliente\" int4,\n  \"id_tel_cliente\" SERIAL NOT NULL,\n  CONSTRAINT \"tel_cliente_pkey\" PRIMARY KEY (\"id_tel_cliente\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"tel_cliente\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"tel_cliente\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.teste",
+    "label": "Create table \"teste\"",
+    "summary": "Creates table \"teste\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "teste"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"teste\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"teste\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"teste\"",
+        "sql": "CREATE TABLE \"public\".\"teste\" (\n  \"id_Teste\" SERIAL NOT NULL,\n  \"nome_test\" character varying,\n  CONSTRAINT \"idTeste_pkey\" PRIMARY KEY (\"id_Teste\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"teste\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"teste\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "column.public.cliente.email_cliente",
+    "label": "Add column \"email_cliente\" to \"cliente\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "email_cliente",
+        "table": "cliente"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"email_cliente\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "email_cliente"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"email_cliente\"",
+        "sql": "ALTER TABLE \"public\".\"cliente\" ADD COLUMN \"email_cliente\" character varying"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"email_cliente\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "email_cliente"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "column.public.cliente.nome_cliente",
+    "label": "Add column \"nome_cliente\" to \"cliente\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "nome_cliente",
+        "table": "cliente"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"nome_cliente\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "nome_cliente"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"nome_cliente\"",
+        "sql": "ALTER TABLE \"public\".\"cliente\" ADD COLUMN \"nome_cliente\" character varying"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"nome_cliente\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "cliente",
+          "nome_cliente"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.tel_cliente.cliente_fk",
+    "label": "Add foreign key \"cliente_fk\" on \"tel_cliente\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "cliente_fk",
+        "table": "tel_cliente"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"cliente_fk\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "cliente_fk",
+          "public",
+          "\"public\".\"tel_cliente\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"cliente_fk\"",
+        "sql": "ALTER TABLE \"public\".\"tel_cliente\"\nADD CONSTRAINT \"cliente_fk\"\nFOREIGN KEY (\"id_cliente\")\nREFERENCES \"public\".\"cliente\" (\"id_cliente\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"cliente_fk\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "cliente_fk",
+          "public",
+          "\"public\".\"tel_cliente\""
+        ]
+      }
+    ]
+  }
+]
