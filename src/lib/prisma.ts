@@ -1,11 +1,13 @@
-import "temporal-polyfill/global";
-import "dotenv/config";
-import postgres from "@prisma/orm-postgres/runtime";
-// Apontando para o contract gerado, não mais para schema
-import type { Contract } from "../../prisma/contract"; 
-import contractJson from "../../prisma/contract.json" with { type: "json" };
+import express from 'express';
+import { UserController } from '../controllers/user.controller';
 
-export const prisma = postgres<Contract>({
-  contractJson,
-  url: process.env.DATABASE_URL!, 
-});
+const app = express.Router();
+
+// Rotas de Usuários
+app.post('/users', UserController.createUser);
+app.get('/users', UserController.getAllUsers);
+app.get('/users/:id', UserController.getUserById);
+app.put('/users/:id', UserController.updateUser);
+app.delete('/users/:id', UserController.deleteUser);
+
+export default app;
