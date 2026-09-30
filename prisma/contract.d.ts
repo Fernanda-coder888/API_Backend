@@ -346,8 +346,7 @@ export namespace Models {
     nomeCliente: CodecTypes['sql/varchar@1']['output'] | null;
     emailCliente: CodecTypes['sql/varchar@1']['output'] | null;
     senhaCliente: CodecTypes['sql/varchar@1']['output'] | null;
-    telCliente: public_TelCliente[];
-    readonly [RelationKeys]?: 'telCliente';
+    readonly [RelationKeys]?: never;
   };
   export type public_TelCliente = {
     idTelCliente: CodecTypes['pg/int4@1']['output'];
@@ -578,19 +577,7 @@ type ContractBase = Omit<
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'sql/varchar@1' };
               };
             };
-            readonly relations: {
-              readonly telCliente: {
-                readonly to: {
-                  readonly namespace: 'public' & NamespaceId;
-                  readonly model: 'TelCliente';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['idCliente'];
-                  readonly targetFields: readonly ['idCliente'];
-                };
-              };
-            };
+            readonly relations: Record<string, never>;
             readonly storage: {
               readonly table: 'cliente';
               readonly namespaceId: 'public';

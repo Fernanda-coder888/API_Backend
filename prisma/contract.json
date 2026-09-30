@@ -56,23 +56,7 @@
                 }
               }
             },
-            "relations": {
-              "telCliente": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "idCliente"
-                  ],
-                  "targetFields": [
-                    "idCliente"
-                  ]
-                },
-                "to": {
-                  "model": "TelCliente",
-                  "namespace": "public"
-                }
-              }
-            },
+            "relations": {},
             "storage": {
               "fields": {
                 "emailCliente": {
