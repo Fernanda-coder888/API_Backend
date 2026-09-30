@@ -1,8 +1,11 @@
 import express from 'express';
 import routes from './routes/index';
+import {corsMiddleware} from './middlewares/cors.middleware';
 
 const app = express();
 const port = 3000;
+
+app.use(corsMiddleware); // NOSSO MIDDLEWARE DE CORS
 
 app.use(express.json());
 app.use(routes);

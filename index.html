@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entrar</title>
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #eef1f6;
+  --card: #ffffff;
+  --text: #1c2333;
+  --muted: #5d6679;
+  --border: #c9d0dc;
+  --accent: #2446c7;
+  --accent-text: #ffffff;
+  --error: #b42318;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151d; --card: #1b202b; --text: #e8ebf2; --muted: #9aa3b5;
+    --border: #363e4f; --accent: #7a93ff; --accent-text: #0e1220; --error: #ff8a80;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151d; --card: #1b202b; --text: #e8ebf2; --muted: #9aa3b5;
+  --border: #363e4f; --accent: #7a93ff; --accent-text: #0e1220; --error: #ff8a80;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.card {
+  width: 100%; max-width: 380px; background: var(--card);
+  border: 1px solid var(--border); border-radius: 12px; padding: 32px 28px;
+}
+h1 { font-size: 1.5rem; margin: 0 0 4px; }
+p.sub { margin: 0 0 24px; color: var(--muted); font-size: .95rem; }
+label { display: block; font-size: .9rem; font-weight: 600; margin-bottom: 6px; }
+.field { margin-bottom: 18px; }
+input {
+  width: 100%; padding: 11px 12px; font: inherit; color: var(--text);
+  background: transparent; border: 1px solid var(--border); border-radius: 8px;
+}
+input:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+input[aria-invalid="true"] { border-color: var(--error); }
+.err { color: var(--error); font-size: .85rem; margin: 6px 0 0; min-height: 1em; }
+button {
+  width: 100%; padding: 12px; font: inherit; font-weight: 600; cursor: pointer;
+  background: var(--accent); color: var(--accent-text); border: 0; border-radius: 8px;
+}
+button:hover { filter: brightness(1.08); }
+.ok { color: var(--muted); text-align: center; margin: 16px 0 0; min-height: 1.2em; font-size: .9rem; }
+</style>
+</head>
+<body>
+<main class="card">
+  <h1>Entrar na conta</h1>
+  <p class="sub">Use seu e-mail e senha para continuar.</p>
+  <form id="f" novalidate>
+    <div class="field">
+      <label for="email">E-mail</label>
+      <input id="email" type="email" autocomplete="email" placeholder="voce@exemplo.com">
+      <p class="err" id="e-email" role="alert"></p>
+    </div>
+    <div class="field">
+      <label for="senha">Senha</label>
+      <input id="senha" type="password" autocomplete="current-password" placeholder="Sua senha">
+      <p class="err" id="e-senha" role="alert"></p>
+    </div>
+    <button type="submit">Entrar</button>
+    <p class="ok" id="ok" role="status"></p>
+  </form>
+</main>
+<script>
+const f = document.getElementById('f');
+const email = document.getElementById('email');
+const senha = document.getElementById('senha');
+
+function setErr(input, id, msg) {
+  document.getElementById(id).textContent = msg;
+  input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+}
+
+f.addEventListener('submit', (ev) => {
+  ev.preventDefault();
+  document.getElementById('ok').textContent = '';
+
+  const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+  const okSenha = senha.value.length >= 6;
+
+  setErr(email, 'e-email', okEmail ? '' : 'Digite um e-mail válido, como voce@exemplo.com.');
+  setErr(senha, 'e-senha', okSenha ? '' : 'A senha deve ter pelo menos 6 caracteres.');
+
+  if (okEmail && okSenha) {
+    // Aqui você envia os dados ao seu servidor (fetch, etc.).
+    document.getElementById('ok').textContent = 'Dados válidos. Conecte aqui ao seu back-end.';
+  }
+});
+</script>
+</body>
+</html>
