@@ -1,4 +1,33 @@
 import express from 'express';
+import { ClienteController } from '../controllers/cliente.controller';
+import { validate } from '../middlewares/validate.middleware';
+import { createClienteSchema, updateClienteSchema } from '../schemas/cliente.schema';
+import { authMiddleware } from '../middlewares/auth.middleware';
+
+const app = express.Router();
+
+// A ROTA DO POST SERÁ PÚBLICA, POIS O USUÁRIO VAI CRIAR SUA CONTA
+// POR ISSO, NÃO PRECISA DE AUTHMIDDLEWARE
+app.post('/clientes', validate(createClienteSchema), ClienteController.createCliente);
+
+// ROTAS PRIVADAS PROTEGIDAS PELO AUTHMIDDLEWARE
+app.get('/clientes', authMiddleware, ClienteController.getAllClientes);
+app.get('/clientes/:id', authMiddleware, ClienteController.getClienteById);
+app.put('/clientes/:id', authMiddleware, validate(updateClienteSchema), ClienteController.updateCliente);
+app.delete('/clientes/:id', authMiddleware, ClienteController.deleteCliente);
+
+export default app;
+
+
+
+
+
+
+
+
+
+
+/*import express from 'express';
 import { prisma as db } from '../lib/prisma';
 
 const app = express.Router();
@@ -91,3 +120,4 @@ app.delete('/clientes/:id', async (req, res) => {
     return res.status(500).json({ error: 'Erro interno ao remover cliente.' });
   }
 });
+*/
