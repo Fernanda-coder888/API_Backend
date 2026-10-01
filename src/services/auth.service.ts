@@ -3,20 +3,20 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export class AuthService {
-    // LOGIN DE USUÁRIO
+    // 1. LOGIN DE USUÁRIO
     static async login(data: any) {
         // Busca o usuário pelo e-mail
         const user = await db.orm.public.User.first({ email: data.email });
         if (!user) {
             throw new Error("Credenciais inválidas.");
         }
-        // VERIFICA SE A SENHA ESTÁ CORRETA
+        // 2 Verifica se a senha está correta
         const senhaValida = await bcrypt.compare(data.password, user.password);
         if (!senhaValida) {
             throw new Error("Credenciais inválidas.");
         }
-        // GERA O TOKEN JWT
-        const secret = process.env.JWT_SECRET || "segredo"; // Use uma variável de
+        // 3. Gera o token JWT
+        const secret = process.env.JWT_SECRET || "segredo"; 
         const token = jwt.sign({
             id: user.id,
             email: user.email
